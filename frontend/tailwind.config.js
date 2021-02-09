@@ -17,6 +17,12 @@ module.exports = {
         '128': '32rem',
         '144': '36rem',
       },
+      borderWidth: {
+        '60' : '3rem'
+      },
+      flex: {
+        'divide' : '1 1 50%'
+      }
     },
   },
   variants: {
@@ -31,10 +37,11 @@ module.exports = {
       inset : ['hover'],
       textColor: ['hover','active'],
       fontWeight: ['hover', 'focus'],
-      
+      fontSize: ['hover']
     }
   },
   plugins: [
-      require('tailwindcss-elevation')(['responsive','hover']),  
+      require('tailwindcss-elevation')(['responsive','hover']),
+      require('@tailwindcss/forms'),  
   ],
 }

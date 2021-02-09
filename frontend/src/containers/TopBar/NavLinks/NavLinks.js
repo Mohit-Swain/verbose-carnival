@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 function NavButton({children}){
     return(
-        <button className="h-12 p-2 active:shadow-md 
+        <button className="h-12 p-2 active:shadow-md text-lg
                             hover:bg-purple-600 md:hover:elevation-3 hover:text-gray-50 hover:underline 
                             hover:font-semibold rounded-md">
             { children }
@@ -23,12 +23,35 @@ class NavLinks extends Component{
         this.state = {
             isListOpen : false
         }
+        this.dropDownRef = React.createRef();
+        this.handleClick = this.handleClick.bind(this);
+        
+    }
+    componentDidMount(){
+        document.addEventListener("click", this.handleClick);
+    }
+    componentWillUnmount(){
+        document.removeEventListener("click", this.handleClick);
     }
     
+    handleClick(e) {
+        if (this.dropDownRef && this.dropDownRef.current.contains(e.target)) {
+            // inside click
+            return;
+        }
+        this.closeDropDown();
+    };
 
-    handleClick(){
+    handleOptionsClick(e){
+        console.log('option');
+        e.stopPropagation();
         this.setState((prevState) => {
             return {isListOpen : !prevState.isListOpen}
+        });
+    }
+    closeDropDown(){
+        this.setState({
+            isListOpen : false
         });
     }
     render(){
@@ -40,15 +63,17 @@ class NavLinks extends Component{
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 11l7-7 7 7M5 19l7-7 7 7" />
                     </svg>)
 
-        let icon = (this.state.isListOpen ? upIcon : downIcon);
-        const navButtonClasses = classNames('z-30 absolute flex flex-col top-16 border-2 border-green-100 elevation-4',' md:elevation-0 md:border-0 md:static md:block',{'hidden' : !this.state.isListOpen});
+        const icon = (this.state.isListOpen ? upIcon : downIcon);
+        const navButtonClasses = classNames('absolute flex flex-col top-16 border-2 border-green-100 elevation-4',
+                                            ' md:elevation-0 md:border-0 md:static md:block bg-bluegray-100 md:bg-transparent',
+                                            {'hidden' : !this.state.isListOpen});
 
         return (
-            <div className="bg-yellow-200 flex w-full justify-end md:space-x-3 items-center px-4 md:px-12
-                                whitespace-nowrap font-mono select-none relative">
+            <div ref={this.dropDownRef} className="bg-yellow-200 flex w-full justify-end md:space-x-3 items-center px-4 md:px-10
+                                whitespace-nowrap font-mono select-none relative transition-all">
                 <div className="h-full space-x-2 md:hidden bg-green-300 flex items-center px-4 
                                 cursor-pointer hover:bg-green-500 hover:shadow-md hover:font-semibold"
-                    onClick={() => this.handleClick()}>
+                    onClick={(e) => this.handleOptionsClick(e)}>
                     <div>
                         Options
                     </div>
@@ -56,12 +81,12 @@ class NavLinks extends Component{
                         {icon}
                     </div>
                 </div>                
-                <div className={navButtonClasses}>
+                <div  className={navButtonClasses}>
                     <NavButton>
-                        Leader Board
+                        Leader_Board
                     </NavButton>
                     <NavButton>
-                        Contact us
+                        Contact_Us
                     </NavButton>
                 </div>   
                 

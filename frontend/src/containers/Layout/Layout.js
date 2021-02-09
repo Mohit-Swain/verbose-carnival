@@ -1,24 +1,55 @@
 import React,{Component} from 'react';
 
 import TopBar from '../TopBar/TopBar';
-
+import MainDropDown from '../../UI/MainDropDown/MainDropDown';
+import PostMemes from '../PostMemes/PostMemes';
 class Layout extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isDropDownOpen : false
+        };
+        this.openDropDown = this.openDropDown.bind(this);
+        this.toggleDropDown = this.toggleDropDown.bind(this);
+        this.closeDropDown = this.closeDropDown.bind(this);
+    }
 
+    closeDropDown() {
+        this.setState({
+            isDropDownOpen : false
+        });
+    }
+    openDropDown(e){
+        e.stopPropagation();
+        this.setState({
+            isDropDownOpen : true
+        });
+    }
+
+    toggleDropDown(e){
+        e.stopPropagation(); 
+        this.setState((prevState) => {
+            return {
+                isDropDownOpen : !prevState.isDropDownOpen
+            }
+        })
+    }
     render(){
         const styles = {
             height: '120vh',
             width : '96px',
             backgroundColor : '#aaa'
         };
-        const downIcon = (<svg xmlns="http://www.w3.org/2000/svg" fill="#000" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
-        </svg>)
+        
         return (
             <>
-                <TopBar />
+                <TopBar isDropDownOpen={this.state.isDropDownOpen} toggleDropDown={this.toggleDropDown}/>
+                <MainDropDown isDropDownOpen={this.state.isDropDownOpen} closeDropDown={this.closeDropDown}>
+                    <PostMemes />
+                </MainDropDown>
                 <div className="bg-blue-200"> TopBar, Memes </div>
                 <div style={styles}>div</div>
-                {downIcon}
+                
             </>
         )
     }
