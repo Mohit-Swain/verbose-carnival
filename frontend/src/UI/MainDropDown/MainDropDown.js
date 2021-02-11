@@ -23,7 +23,7 @@ function MainDropDown(props){
 
     const mainClasses = classNames({'-top-3/4' : !props.isDropDownOpen,
                                     'top-16':  props.isDropDownOpen},
-                        "transition-all duration-500 fixed h-5/6 md:h-3/4 w-full z-0  bg-transparent")
+                        "transition-all duration-500 fixed h-5/6 md:h-3/4 w-full z-10  bg-transparent")
 
     return (
         <div className={mainClasses}  ref={topNode}>

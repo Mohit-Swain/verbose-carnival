@@ -31,8 +31,6 @@ var upload = multer({
         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
             cb(null, true);
         } else {
-            // cb(null, false);
-            console.log('here');
             const error = new Error('Only .png, .jpg and .jpeg format allowed!');
             error.code = '400'
             return cb(error);

@@ -39,14 +39,13 @@ class PostMemes extends Component {
         })
     }
     updateImageUrl(e){
+        // e is event or a file
         this.setState({
             loadingUrl : true
         });
         const myFile = (e.target ? e.target.files[0] : e);
         postImageImgur(myFile)
         .then(res => {
-            console.log(res);
-            console.log(res.data.data.link);
             this.setState({
                 loadingUrl : false,
                 memeUrl : res.data.data.link
@@ -57,6 +56,7 @@ class PostMemes extends Component {
             this.setState({loadingUrl : false});
         })
     }
+    
     addEmoji(emoji){
         this.setState((prevState) => {
             return {

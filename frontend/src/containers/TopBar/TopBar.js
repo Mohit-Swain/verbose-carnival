@@ -7,7 +7,7 @@ import NavLinks from './NavLinks/NavLinks';
 class TopBar extends Component{
     render(){
         return (
-            <header className="fixed z-10 top-0">
+            <header className="fixed z-20 top-0">
                 <nav className="h-16  align-middle bg-bluegray-100 flex flex-nowrap w-screen justify-around">
                     <NavLogo />
                     <AddPostIcon isDropDownOpen={this.props.isDropDownOpen} toggleDropDown={this.props.toggleDropDown} />

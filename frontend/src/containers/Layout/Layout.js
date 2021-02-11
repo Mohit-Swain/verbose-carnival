@@ -4,12 +4,41 @@ import TopBar from '../TopBar/TopBar';
 import MainDropDown from '../../UI/MainDropDown/MainDropDown';
 import PostMemes from '../PostMemes/PostMemes';
 import SideBar from '../../UI/SideBar/SideBar';
+import MemeList from '../../components/MemeList/MemeList';
 /*eslint-disable*/
 class Layout extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isDropDownOpen : false
+            isDropDownOpen : false,
+            memeList : [
+
+                {
+            
+            "id": "1",       
+            
+            "name": "MS Dhoni",
+            
+            "url": "https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg",
+            
+            "caption": "Meme for my place"
+            
+                },
+            
+                {
+            
+            "id": "2",
+            
+            "name": "Viral Kohli",
+            
+            "url": "https://images.pexels.com/photos/1078983/pexels-photo-1078983.jpeg",
+            
+            "caption": "Another home meme"
+            
+                }
+            
+              ]
+            
         };
         this.openDropDown = this.openDropDown.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
@@ -37,11 +66,6 @@ class Layout extends Component {
         })
     }
     render(){
-        const styles = {
-            height: '120vh',
-            width : '96px',
-            backgroundColor : '#aaa'
-        };
                 
         return (
             <>
@@ -50,8 +74,7 @@ class Layout extends Component {
                     <PostMemes />
                 </MainDropDown>
                 <SideBar />
-                <div className="bg-blue-200"> TopBar, Memes </div>
-                <div style={styles}>div</div>
+                <MemeList memeList={this.state.memeList}/>
                 
             </>
         )
