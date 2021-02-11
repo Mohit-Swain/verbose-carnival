@@ -12,7 +12,7 @@ function NavButton({children}){
 }
 
 NavButton.propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.string
 }
 
 
@@ -43,7 +43,6 @@ class NavLinks extends Component{
     };
 
     handleOptionsClick(e){
-        console.log('option');
         e.stopPropagation();
         this.setState((prevState) => {
             return {isListOpen : !prevState.isListOpen}

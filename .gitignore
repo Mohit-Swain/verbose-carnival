@@ -167,3 +167,8 @@ typings/
 
 .jshintrc
 .jshintignore
+
+.env.development
+.env.production
+
+.development.env

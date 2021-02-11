@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import TopBar from '../TopBar/TopBar';
 import MainDropDown from '../../UI/MainDropDown/MainDropDown';
 import PostMemes from '../PostMemes/PostMemes';
+import SideBar from '../../UI/SideBar/SideBar';
+/*eslint-disable*/
 class Layout extends Component {
     constructor(props){
         super(props);
@@ -40,13 +42,14 @@ class Layout extends Component {
             width : '96px',
             backgroundColor : '#aaa'
         };
-        
+                
         return (
             <>
                 <TopBar isDropDownOpen={this.state.isDropDownOpen} toggleDropDown={this.toggleDropDown}/>
                 <MainDropDown isDropDownOpen={this.state.isDropDownOpen} closeDropDown={this.closeDropDown}>
                     <PostMemes />
                 </MainDropDown>
+                <SideBar />
                 <div className="bg-blue-200"> TopBar, Memes </div>
                 <div style={styles}>div</div>
                 
