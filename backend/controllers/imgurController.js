@@ -24,7 +24,7 @@ exports.postImageImgur = (req,res,next) => {
 
     axios(config)
     .then(function (response) {
-        return res.json(response.data).status(200);
+        return res.json(response.data).status(201);
     })
     .catch(function (error) {
         next(error);

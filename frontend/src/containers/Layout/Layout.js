@@ -1,9 +1,8 @@
 import React,{Component} from 'react';
-
+import backendAxios from '../../Axios/backendAxios';
 import TopBar from '../TopBar/TopBar';
 import MainDropDown from '../../UI/MainDropDown/MainDropDown';
 import PostMemes from '../PostMemes/PostMemes';
-import SideBar from '../../UI/SideBar/SideBar';
 import MemeList from '../../components/MemeList/MemeList';
 /*eslint-disable*/
 class Layout extends Component {
@@ -11,33 +10,7 @@ class Layout extends Component {
         super(props);
         this.state = {
             isDropDownOpen : false,
-            memeList : [
-
-                {
-            
-            "id": "1",       
-            
-            "name": "MS Dhoni",
-            
-            "url": "https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg",
-            
-            "caption": "Meme for my place"
-            
-                },
-            
-                {
-            
-            "id": "2",
-            
-            "name": "Viral Kohli",
-            
-            "url": "https://images.pexels.com/photos/1078983/pexels-photo-1078983.jpeg",
-            
-            "caption": "Another home meme"
-            
-                }
-            
-              ]
+            memeList : []
             
         };
         this.openDropDown = this.openDropDown.bind(this);
@@ -45,6 +18,16 @@ class Layout extends Component {
         this.closeDropDown = this.closeDropDown.bind(this);
     }
 
+    componentDidMount(){
+        backendAxios
+            .get('/memes')
+            .then((res) => {
+                this.setState({memeList : res.data})
+            })
+            .catch((err) => {
+                alert(err.data.message);
+            })
+    }
     closeDropDown() {
         this.setState({
             isDropDownOpen : false
@@ -70,12 +53,10 @@ class Layout extends Component {
         return (
             <>
                 <TopBar isDropDownOpen={this.state.isDropDownOpen} toggleDropDown={this.toggleDropDown}/>
-                <MainDropDown isDropDownOpen={this.state.isDropDownOpen} closeDropDown={this.closeDropDown}>
-                    <PostMemes />
-                </MainDropDown>
-                <SideBar />
-                <MemeList memeList={this.state.memeList}/>
-                
+                    <MainDropDown isDropDownOpen={this.state.isDropDownOpen} closeDropDown={this.closeDropDown}>
+                        <PostMemes  />
+                    </MainDropDown>
+                    <MemeList memeList={this.state.memeList}/>
             </>
         )
     }

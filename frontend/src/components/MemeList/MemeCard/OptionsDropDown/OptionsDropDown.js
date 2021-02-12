@@ -13,9 +13,11 @@ function OptionsDropDown(props) {
             </button>
             {
                 props.dropDownOpen ? 
-                (<div onClick={props.toggleDropDown} className="absolute right-0 md:left-0 md:right-auto mt-2 w-48 bg-white rounded-md overflow-hidden elevation-6 z-20 tracking-wide">
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Edit </a>
-                    <a href="#" className="block px-4 py-2 text-sm text-red-400 border-b hover:bg-gray-200">Report </a>
+                (<div className="absolute right-0 md:left-0 md:right-auto mt-2 w-48 bg-white rounded-md overflow-hidden elevation-6 z-20 tracking-wide">
+                    <ul>    
+                        <li onClick={props.openEditForm} className="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200 cursor-pointer">Edit </li>
+                        <li className="block px-4 py-2 text-sm text-red-400 border-b hover:bg-gray-200 cursor-pointer">Report </li>
+                    </ul>
                 </div>) 
                 : null
             }
@@ -27,7 +29,9 @@ function OptionsDropDown(props) {
 
 OptionsDropDown.propTypes = {
     dropDownOpen : PropTypes.bool,
-    toggleDropDown : PropTypes.func
+    toggleDropDown : PropTypes.func,
+    openEditForm : PropTypes.func,
+    closeEditForm : PropTypes.func
 }
 
 export default OptionsDropDown;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PostMemesForm from '../../components/PostMemesForm/PostMemesForm';
 import PostMemesView from '../../components/PostMemesView/PostMemesView';
 import postImageImgur from '../../utils/postImageImgur';
-/*eslint-disable*/
+import backendAxios from '../../Axios/backendAxios';
 
 function capitalizeTheFirstLetterOfEachWord(words) {
     var separateWord = words.toLowerCase().split(' ');
@@ -25,6 +25,20 @@ class PostMemes extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.addEmoji = this.addEmoji.bind(this);
         this.updateImageUrl = this.updateImageUrl.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(){
+        backendAxios.post('/memes',{
+            url : this.state.memeUrl,
+            caption : this.state.memeCaption
+        }).then(() => {
+            alert('uploaded');
+        })
+        .catch(err => {
+            alert('something went wrong');
+            console.error(err);
+        })
     }
     
     handleInputChange(event) {
@@ -52,7 +66,8 @@ class PostMemes extends Component {
             })
         })
         .catch(err => {
-            alert(err.status + '-' + err.statusText);
+            alert('something went wrong');
+            console.error(err);
             this.setState({loadingUrl : false});
         })
     }
@@ -69,11 +84,12 @@ class PostMemes extends Component {
         return(
             <div className="h-full flex flex-wrap flex-col md:flex-row items-stretch divide-y-2 md:divide-x-2 divide-bluegray-300">
                 <PostMemesForm handleInputChange={this.handleInputChange} parentState={this.state} addEmoji={this.addEmoji}
-                               updateImageUrl={this.updateImageUrl} />
+                               updateImageUrl={this.updateImageUrl} handleSubmit={this.handleSubmit}/>
                 <PostMemesView parentState={this.state}/>
             </div>
         );
     }
 }
+
 
 export default PostMemes;

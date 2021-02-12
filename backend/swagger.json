@@ -1,0 +1,22 @@
+{
+    "definition": {
+      "openapi": "3.0.0",
+      "info": {
+        "title": "Meme App APIs with Swagger",
+        "version": "0.1.0",
+        "description":
+          "This is a simple CRUD API application made with Express and documented with Swagger, used to maintain my Meme App",
+        "contact": {
+          "name": "Mohit Swain",
+          "url": "https://www.linkedin.com/in/mohit-swain-720379125/",
+          "email": "swain6564@gmail@email.com"
+        }
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8081"
+        }
+      ]
+    },
+    "apis": ["./routes/*.js"]
+}

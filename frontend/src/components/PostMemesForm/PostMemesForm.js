@@ -13,8 +13,9 @@ function PostMemesForm(props){
     const onDrop = (files) => {
         props.updateImageUrl(files[0]);
     }
+
     return (
-        <section className="md:flex-divide h-2/3 md:h-full w-full bg-blue-100 overflow-auto">
+        <section className={"md:flex-divide md:h-full w-full bg-blue-100 overflow-auto " + (props.editMode ? 'h-full' : 'h-2/3') }>
             <DropZone onDrop={onDrop} noClick>
                 {({getRootProps,getInputProps,isDragActive}) => (
                     <div {...getRootProps()}  >
@@ -23,7 +24,7 @@ function PostMemesForm(props){
 
                         <form name="postMemes" encType="multipart/form-data">
                             <h2 className="text-lg md:text-2xl my-2 md:my-3 font-bold font-mono text-center leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                                Add New Memes...
+                                {props.editMode ? 'Edit Meme' :'Add New Memes...'}
                             </h2>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -31,9 +32,10 @@ function PostMemesForm(props){
                                 </label>
                                 <input name="userName" 
                                     className="shadow appearance-none border rounded w-full py-2 px-3 
-                                    text-gray-700 leading-tight focus:outline-none focus:shadow-outline capitalize" 
+                                    text-gray-700 leading-tight focus:outline-none focus:shadow-outline capitalize disabled:opacity-50" 
                                     type="text" placeholder="User Name" autoComplete="off" required
-                                    value={props.parentState.userName} onChange={props.handleInputChange}   
+                                    value={props.parentState.userName} onChange={props.handleInputChange} 
+                                    disabled={props.editMode}  
                                 />
                             </div>
                                 <div className="mb-4 border-2 rounded border-dashed border-gray-800 px-4 py-2">
@@ -51,7 +53,7 @@ function PostMemesForm(props){
                                         <hr className="w-full  border-gray-400"/>
                                     </div>
                                     <label className="flex justify-center py-1 px-3 text-gray-700 leading-tight" htmlFor="imageUpload">
-                                        {props.parentState.loadingUrl ? (<span className="text-green-500">Loading...</span>) :(<span>Drop a File Or <span className="underline font-mono cursor-pointer hover:text-blue-400">Click Here</span> to Upload </span>)}
+                                        {(!props.editMode && props.parentState.loadingUrl) ? (<span className="text-green-500">Loading...</span>) :(<span>Drop a File Or <span className="underline font-mono cursor-pointer hover:text-blue-400">Click Here</span> to Upload </span>)}
                                     </label>
                                     <input {...getInputProps()} name="imageFile" type="file" ref={imageFileRef} id="imageUpload" accept="image/*" 
                                     className=" hidden py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -80,16 +82,19 @@ function PostMemesForm(props){
                             </div>
                             </label>
                             </div>
-                            <div className="mb-4 float-right">
+                            {!props.editMode && (
+                                <div className="mb-4 float-right">
                                 <label className="block">
                                 <input className="mr-2 leading-tight" type="checkbox"/>
                                 <span className="text-sm">
                                     Remember Me
                                 </span>
                                 </label>
-                            </div>
+                                </div>
+                            ) }
+                            
                             <div className="flex items-center justify-start">
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                <button onClick={props.handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                                     Submit
                                 </button>
                             </div>
@@ -105,7 +110,9 @@ PostMemesForm.propTypes ={
     parentState : PropTypes.object,
     handleInputChange : PropTypes.func,
     addEmoji : PropTypes.func,
-    updateImageUrl : PropTypes.func
+    updateImageUrl : PropTypes.func,
+    handleSubmit : PropTypes.func,
+    editMode : PropTypes.bool
 };
 
 export default PostMemesForm;

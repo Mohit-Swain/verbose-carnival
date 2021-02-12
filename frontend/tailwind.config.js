@@ -12,6 +12,7 @@ module.exports = {
         'bluegray' : colors.blueGray,
         'mycyan' : '#9EF0F0',
         'myviolet': '#8A3FFC',
+        'violet' : colors.violet
       },
       spacing: {
         '128': '32rem',
@@ -37,7 +38,8 @@ module.exports = {
       inset : ['hover'],
       textColor: ['hover','active'],
       fontWeight: ['hover', 'focus'],
-      fontSize: ['hover']
+      fontSize: ['hover'],
+      opacity: ['disabled']
     }
   },
   plugins: [
