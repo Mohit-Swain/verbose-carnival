@@ -35,8 +35,7 @@ function MemeCard(props){
 
         backendAxios
             .patch('/memes/'+props.meme.id,obj)
-            .then((res) => {
-                console.log(res);
+            .then(() => {
                 alert('updated');
                 setEditForm(false);
             })

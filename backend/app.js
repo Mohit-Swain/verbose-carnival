@@ -7,7 +7,8 @@ const app = express();
 const swaggerApp = express();
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require("swagger-ui-express");
-const sequelizeDB = require('./utils/memeSchema');
+const swaggerOptions = require('./swagger.json');
+const sequelizeDB = require('./models/memeSchema');
 
 const multer = require('multer');
 const path = require('path');
@@ -44,10 +45,10 @@ var upload = multer({
     }
 });
 // Swagger init 
-const swaggerOptions = require('./swagger.json');
 
 const specs = swaggerJsdoc(swaggerOptions);
-swaggerApp.use(logger('dev'))
+swaggerApp.use(logger('dev'));
+swaggerApp.use(cors());
 swaggerApp.use("/",swaggerUi.serve,swaggerUi.setup(specs));
 
 const swaggerPort = process.env.SWAGGER_PORT || 8080;

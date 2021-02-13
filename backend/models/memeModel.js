@@ -1,4 +1,4 @@
-const MemeSchema = require('../utils/memeSchema');
+const MemeSchema = require('./memeSchema');
 
 exports.getMemes = () => {
     return new Promise((resolve,reject) =>{
@@ -8,7 +8,6 @@ exports.getMemes = () => {
             order: [['createdAt','DESC']]
         })
         .then(memes => {
-            console.log(memes);
             if(!memes){
                 reject(new Error('Something went wrong with DB'));
             }
@@ -50,8 +49,8 @@ exports.patchMemes = (id,obj) => {
                     resolve(null);
                 }
                 else{
-                    if(obj.url) meme.url = obj.url;
-                    if(obj.caption) meme.caption = obj.caption;
+                    meme.url = obj.url;
+                    meme.caption = obj.caption;
                     return meme.save();
                 }
             })

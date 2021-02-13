@@ -10,15 +10,27 @@ exports.getMemes = async (req,res,next) => {
 }
 
 exports.postMemes = (req,res,next) => {
-    const name = req.body.name;
-    const url = req.body.url;
-    const caption = req.body.caption;
-    if(!name || !url || !caption){
-        return res.status(400).json({
-            status : 400,
-            message : 'Some arguments are missing'
-        });
+    let name = req.body.name;
+    let url = req.body.url;
+    let caption = req.body.caption;
+    if(name===undefined || url===undefined || caption===undefined){
+      return res.status(400).json({
+          status : 400,
+          message : 'Some arguments/values are missing'
+      });
     }
+
+    name = name.trim();
+    url = url.trim();
+    caption = caption.trim();
+    if(name === '' || url==='' || caption===''){
+      return res.status(405).json({
+        status: 405,
+        message: 'Invalid Inputs given'
+      })
+    }
+    
+    
     memeModel.postMemes({
         name : name,
         url : url,
@@ -31,21 +43,29 @@ exports.postMemes = (req,res,next) => {
 }
 
 exports.patchMemes = (req,res,next) => {
-    const id = req.params.id;
+    let id = req.params.id.trim();
     if(!id){
-        return res.json(404).json({
-            status: 404,
-            message: 'id parm missing'
+        return res.json(405).json({
+            status: 405,
+            message: 'id parm invalid'
         });
     }
     
-    const url = req.body.url;
-    const caption = req.body.caption;
-    if(!url && !caption){
+    let url = req.body.url;
+    let caption = req.body.caption;
+    if(url === undefined || caption === undefined){
         return res.status(400).json({
             status : 400,
-            message : 'All arguments are missing'
+            message : 'Arguments are missing'
         });
+    }
+    url = url.trim();
+    caption = caption.trim();
+    if(url === '' || caption === ''){
+      return res.status(405).json({
+        status: 405,
+        message: 'Invalid Inputs given'
+      })
     }
     const obj = {
         url : url,
