@@ -89,3 +89,15 @@ exports.patchMemes = (req,res,next) => {
     })
     .catch(err => next(err));
 }
+
+
+exports.getMemeUsers = (req,res,next) => {
+    memeModel.getMemeUsers()
+    .then(data => {
+      return res.status(200).json(data);
+    })
+    .catch(err => {
+      return next(err);
+    })
+    
+}

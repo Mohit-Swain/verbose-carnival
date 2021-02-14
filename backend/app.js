@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const {v4} = require('uuid');
+const compression = require('compression');
 
 const app = express();
 const swaggerApp = express();
@@ -13,9 +14,7 @@ const sequelizeDB = require('./models/memeSchema');
 const multer = require('multer');
 const path = require('path');
 
-require('dotenv').config();
-
-
+app.use(compression());
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json({limit : '5mb'}));
@@ -49,9 +48,9 @@ var upload = multer({
 const specs = swaggerJsdoc(swaggerOptions);
 swaggerApp.use(logger('dev'));
 swaggerApp.use(cors());
-swaggerApp.use("/",swaggerUi.serve,swaggerUi.setup(specs));
+swaggerApp.use("/swagger-ui",swaggerUi.serve,swaggerUi.setup(specs));
 
-const swaggerPort = process.env.SWAGGER_PORT || 8080;
+const swaggerPort = 8080;
 swaggerApp.listen(swaggerPort,function(){
     console.log("swagger is listening on "+ swaggerPort);
 });

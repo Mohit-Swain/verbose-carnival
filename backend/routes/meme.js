@@ -140,4 +140,37 @@ memeRouter.post('/memes',memeController.postMemes);
 
 memeRouter.patch('/memes/:id',memeController.patchMemes);
 
+/**
+ * @swagger
+ * paths:
+ *  /memes/users:
+ *    get:
+ *      summary: it returns a user name along with count of memes posted by that user.
+ *      description: It returns an array name and memeCount of all distinct users ordered by DESC memeCount.
+ *      tags: [Memes]
+ *      responses:
+ *        "200":
+ *          description: Query successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items: 
+ *                  type: object
+ *                  properties:
+ *                    name:
+ *                      type: string
+ *                      description: user name of the meme creator
+ *                    memeCount:
+ *                      type: integer
+ *                      description: count of memes posted by the user
+ * 
+ *              example:
+ *                - name: Mohit Swain
+ *                  memeCount: 5
+ *                - name: Ashok Kumar
+ *                  memeCount: 3
+ */
+memeRouter.get('/memes/users',memeController.getMemeUsers)
+
 module.exports = memeRouter;

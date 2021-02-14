@@ -1,5 +1,5 @@
 const MemeSchema = require('./memeSchema');
-
+const sequelize = require('sequelize');
 exports.getMemes = () => {
     return new Promise((resolve,reject) =>{
         MemeSchema.findAll({
@@ -59,4 +59,28 @@ exports.patchMemes = (id,obj) => {
                 reject(err);
             })
     }) 
+}
+
+exports.getMemeUsers = () => {
+  return new Promise((resolve,reject) => {
+    
+    MemeSchema.findAll({
+      attributes : ['name',[sequelize.fn('COUNT','*'),'memeCount']],
+      group: 'name',
+      raw: true
+    })
+    .then(result => {
+        result = result.map(item => {
+          return {
+            name : item.name,
+            memeCount : parseInt(item.memeCount)
+          }
+        });
+        result.sort((a,b)=> b.memeCount - a.memeCount);
+        resolve(result);
+    })
+    .catch(err => {
+      reject(err);
+    })
+  })
 }
