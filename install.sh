@@ -16,10 +16,7 @@ sudo apt-get update
 
 # Install the latest version of PostgreSQL.
 # If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
- sudo apt-get -y install postgresql
+sudo apt-get -y install postgresql
 
-
-sudo su - postgres 
-
-psql -c "CREATE DATABASE memedb;"
-
+sudo -u postgres psql -c "CREATE DATABASE memedb;"
+sudo -u postgres psql -c "ALTER USER postgres PASSWORD '1234';"
