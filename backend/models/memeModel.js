@@ -84,3 +84,11 @@ exports.getMemeUsers = () => {
     })
   })
 }
+
+exports.getOneMeme = (id) => {
+    return new Promise((resolve,reject) => {
+        MemeSchema.findByPk(id)
+        .then(data => resolve(data))
+        .then(err => reject(err));
+    })
+}

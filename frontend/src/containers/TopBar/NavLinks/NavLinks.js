@@ -70,8 +70,6 @@ class NavLinks extends Component{
     }
 
     openContactForm(e){
-      console.log('open');
-      e.stopPropagation();
       this.setState({
         isOpenContactUs  : true
       });

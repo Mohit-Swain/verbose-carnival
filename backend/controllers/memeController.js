@@ -101,3 +101,26 @@ exports.getMemeUsers = (req,res,next) => {
     })
     
 }
+
+exports.getOneMeme = (req,res,next) => {
+  let id = req.params.id.trim();
+    if(!id){
+        return res.json(400).json({
+            status: 400,
+            message: 'id parm invalid'
+        });
+    }
+    id = parseInt(id,10);
+  memeModel.getOneMeme(id)
+  .then(data => {
+    if(data){
+      return res.status(200).json(data);
+    }
+    return res.status(404).json({
+      status: 404,
+      message: 'meme not found'
+    });
+  }).catch(err => {
+    return next(err);
+  })
+}

@@ -1,10 +1,10 @@
-import React,{useState, useRef} from 'react';
+import React,{useState} from 'react';
 import Picker from 'emoji-picker-react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DropZone from 'react-dropzone';
 function PostMemesForm(props){
-    const imageFileRef = useRef();
+    // const imageFileRef = useRef();
     const emojiSvg = (<svg xmlns="http://www.w3.org/2000/svg" className="w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>)
@@ -52,10 +52,10 @@ function PostMemesForm(props){
                                         <span className="w-1/6 text-xm md:text-sm  text-gray-500 font-mono">Or</span>
                                         <hr className="w-full  border-gray-400"/>
                                     </div>
-                                    <label className="flex justify-center py-1 px-3 text-gray-700 leading-tight" htmlFor="imageUpload">
-                                        {(!props.editMode && props.parentState.loadingUrl) ? (<span className="text-green-500">Loading...</span>) :(<span>Drop a File Or <span className="underline font-mono cursor-pointer hover:text-blue-400">Click Here</span> to Upload </span>)}
+                                    <label className="flex justify-center py-1 px-3 text-gray-700 leading-tight" htmlFor={props.editMode ? "editImageFile":"imageFile"}>
+                                        {(props.parentState.loadingUrl) ? (<span className="text-green-500">Loading...</span>) :(<span>Drop a File Or <span className="underline font-mono cursor-pointer hover:text-blue-400">Click Here</span> to Upload </span>)}
                                     </label>
-                                    <input {...getInputProps()} name="imageFile" type="file" ref={imageFileRef} id="imageUpload" accept="image/*" 
+                                    <input {...getInputProps()} name={props.editMode ? "editImageFile":"imageFile"} type="file"  id={props.editMode ? "editImageFile":"imageFile"} accept="image/*" 
                                     className=" hidden py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         onChange={props.updateImageUrl}
                                     />

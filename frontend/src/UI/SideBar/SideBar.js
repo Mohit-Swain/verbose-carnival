@@ -26,7 +26,7 @@ function SideBar(props){
         }
     },[]);
 
-    const asideClasses = classNames("transform top-0 px-4 py-8 right-0 w-3/4 md:w-5/12 bg-violet-200 elevation-5 fixed h-full overflow-auto ease-in-out transition-all duration-300 z-40 top-16",
+    const asideClasses = classNames("transform top-0 px-4 py-8 right-0 w-10/12 md:w-5/12 bg-violet-200 elevation-5 fixed h-full overflow-auto ease-in-out transition-all duration-300 z-40 top-16",
                 {'translate-x-0' : props.isOpened,'translate-x-full' : !props.isOpened});
     return(
         <aside ref={topRef} className={asideClasses}>

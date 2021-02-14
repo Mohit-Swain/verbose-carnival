@@ -30,6 +30,7 @@ class PostMemes extends Component {
 
     handleSubmit(){
         backendAxios.post('/memes',{
+            name : this.state.userName,
             url : this.state.memeUrl,
             caption : this.state.memeCaption
         }).then(() => {
@@ -66,7 +67,6 @@ class PostMemes extends Component {
             })
         })
         .catch(err => {
-            alert('something went wrong');
             console.error(err);
             this.setState({loadingUrl : false});
         })

@@ -22,6 +22,7 @@ class Layout extends Component {
         backendAxios
             .get('/memes')
             .then((res) => {
+                console.log(res);
                 this.setState({memeList : res.data})
             })
             .catch((err) => {

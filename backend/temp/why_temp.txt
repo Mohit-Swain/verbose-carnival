@@ -1,0 +1,4 @@
+Hey this folder is a temp folder used to temperaroly keep the images while the server post it to imgur
+
+
+THIS FILE IS IMPORTANT AS HEROKU DOESN't UPLOAD EMPTY FILES TO IT's server so by keeping this file we can ensure heroku to store the temp folder in the server
