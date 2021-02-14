@@ -11,13 +11,14 @@ function LeaderboardTable(){
       .catch(err => alert(err))
     },[])
 
-    const tableRows = userDeatils.map((items,idx) => {
+    
+    let tableRows = userDeatils.map((items,idx) => {
         let rowClassName = "divide-x-2";
         if(idx%2){
           rowClassName += " bg-gray-100"
         }
         return (
-          <tr className={rowClassName}>
+          <tr key={items.name} className={rowClassName}>
             <td className="w-1/5 text-left py-3 px-4">{idx + 1}</td>
             <td className="w-2/5 text-left py-3 px-4">{items.name}</td>
             <td className="w-2/5 text-left py-3 px-4">{items.memeCount}</td>

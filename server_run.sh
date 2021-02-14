@@ -1,4 +1,4 @@
-cd backend/
+cd ./backend
 
 rm .env
 

@@ -14,7 +14,12 @@
       },
       "servers": [
         {
-          "url": "http://localhost:8081"
+          "url": "http://localhost:8081",
+          "description" : "dev server uses local data"
+        },
+        {
+          "url": "http://3.15.25.51:8081",
+          "description" : "prod server uses production data"
         }
       ]
     },

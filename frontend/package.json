@@ -13,6 +13,9 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "emoji-picker-react": "^3.4.2",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
+    "path": "^0.12.7",
     "postcss": "^7.0.35",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -25,6 +28,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "start_prod" : "node serve.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
