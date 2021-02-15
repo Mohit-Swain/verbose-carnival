@@ -18,7 +18,7 @@
           "description" : "dev server uses local data"
         },
         {
-          "url": "http://3.15.25.51:8081",
+          "url": "https://afternoon-scrubland-87341.herokuapp.com",
           "description" : "prod server uses production data"
         }
       ]

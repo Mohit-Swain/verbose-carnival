@@ -44,6 +44,13 @@ function MemeCard(props){
                 console.error(err);
             })
     }
+    const addEmoji = (emoji) => {
+      changeMemeState((prevState) => {
+          let newState = {...memeState};
+          newState.memeCaption = prevState.memeCaption + emoji;
+          return newState;
+      });
+  }
     const openEditForm = () => {
         setDropDown(false);
         setEditForm(true);
@@ -61,7 +68,7 @@ function MemeCard(props){
         <>
             {isOpenEditForm ? ( 
                 <SideBar isOpened={isOpenEditForm} closeSideBar={function(){closeEditForm()}}>
-                    <PostMemesForm parentState={memeState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} editMode></PostMemesForm>
+                    <PostMemesForm parentState={memeState} handleInputChange={handleInputChange} handleSubmit={handleSubmit} addEmoji={addEmoji} editMode></PostMemesForm>
                 </SideBar>
             ) : null}
             <div className="mx-auto px-4 py-6 max-w-xl rounded-md">
