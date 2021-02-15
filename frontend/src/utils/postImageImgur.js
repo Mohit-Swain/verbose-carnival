@@ -2,7 +2,7 @@ import backendAxios from '../Axios/backendAxios';
 
 function postImageImgur(file){
     if(!file){
-        return null;
+        return new Promise((_,reject) => reject('no files given'));
     }
     const data = new FormData();
     data.append('image',file);

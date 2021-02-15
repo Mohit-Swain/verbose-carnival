@@ -67,7 +67,6 @@ class PostMemes extends Component {
             })
         })
         .catch(err => {
-            alert('something went wrong');
             console.error(err);
             this.setState({loadingUrl : false});
         })
