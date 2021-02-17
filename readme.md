@@ -41,9 +41,10 @@
 
 ### - **Ubuntu Users** Can set the backend by running `./test_server.sh` in the parnet folder, 
 
-> - It Will install required packages and set up a postgres user by name: `postgres` and password `1234`.
-> - You can visit your postgres and see the data by using `sudo -i -u postgres psql`
-
+- It Will install required packages and set up a postgres user by name: `postgres` and password `1234`.
+- You can visit your postgres and see the data by using `sudo -i -u postgres psql`
+- use `\l` to list databases, use `\c memedb` to use the project database.
+- remember the data is kept in `memes` table, try `SELECT * FROM memes;` to see all rows.
 
 _More Updates are comming soon_
 
