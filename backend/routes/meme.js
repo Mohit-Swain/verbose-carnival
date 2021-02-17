@@ -171,6 +171,29 @@ memeRouter.patch('/memes/:id',memeController.patchMemes);
  *                - name: Ashok Kumar
  *                  memeCount: 3
  */
-memeRouter.get('/memes/users',memeController.getMemeUsers)
+memeRouter.get('/memes/users',memeController.getMemeUsers);
+
+/** 
+ * @swagger
+ * paths:
+ *  /memes/{id}:
+ *    get:
+ *      summary: to get a meme of id
+ *      description: to get meme of the id given or get 404 if error is present.
+ *      tags: [Memes]        
+ *      responses:
+ *        "200":
+ *          description: resource successfully Updated
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Meme'
+ *        "400":
+ *          description: id is empty
+ *        "404":
+ *          description: No meme of such id found
+ */
+
+memeRouter.get('/memes/:id',memeController.getOneMeme);
 
 module.exports = memeRouter;
